@@ -1,65 +1,126 @@
-"use strict";
+var selected = null;
+var firstTower = document.querySelector('#firstTower');
+var secondTower = document.querySelector('#secondTower');
+var thirdTower = document.querySelector('#thirdTower');
+var firstRing = document.querySelector('#firstRing');
+var secondRing = document.querySelector('#secondRing');
+var thirdRing = document.querySelector('#thirdRing');
 
-var towerSelected = false;
-var selectedTowerId;
-var $selectedPiece;
-var countMoves = 0;
+//code for first tower
+firstTower.addEventListener('click', function(event){
+    //check if same tower selected
+    var tower = event.target;
+    var firstRing = event.target.firstElementChild;
+        if(selected){
+            //two things can happen here:
+            //if first child is already selected, then deselect it
+            //i.e we are clicking on a tower that has already been clicked
+            if(firstRing){
+                if(selected.dataset.weight == firstRing.dataset.weight){
+                    //they are the same to deselect it
+                    selected.classList.remove("selected");
+                    selected = null;
+                }
+                //else if different then try and see if we can place it on top
+                //we compare whats selected weight to first ring weight
+                else if(selected.dataset.weight  < firstRing.dataset.weight){
+                    //we can only place on top if its less than
+                    tower.insertBefore(selected,firstRing);
+                    selected.classList.remove("selected");
+                    selected = null;
+                }
+            }else{
+                tower.appendChild(selected);
+                selected.classList.remove("selected");
+                selected = null;
+            }
+        }else{
+            selected = firstRing;
+            selected.classList.add("selected");
+        }       
+});
 
-$(document).ready(init);
-
-function init(){
-    var $towers = $('.towerBase');
-    $towers.on('click', towerClicked);
-}
-
-function towerClicked(event){
-    var currentTowerId = this.id;
-    //unselect the piece
-    if (towerSelected){
-        if (this.id === selectedTowerId){
-        towerClicked = false;
-        $selectedPiece.removeClass('selected');
-
-      } else{
-        var topPieceId = $selectedPiece.attr('id');
-        var bottomPieceId = $(this).children(":first").attr('id');
-
-        // piece gets moved to new tower
-        if (!bottomPieceId || validMove(topPieceId, bottomPieceId)){
-            $selectedPiece.remove();
-            $(this).prepend($selectedPiece);
-            towerSelected = false;
-            $selectedPiece.removeClass('selected');
-            countMoves += 1;
-            $('#displayMoves').text("Moves: " + countMoves);
-
-        // invalid move
-        } else {
-            towerSelected = false;
-            $selectedPiece.removeClass('selected');
+//code for second tower
+secondTower.addEventListener('click', function(event){
+    //check if same tower selected
+    var tower = event.target;
+    var firstRing = event.target.firstElementChild;
+        if(selected){
+            //two things can happen here:
+            //if first child is already selected, then deselect it
+            //i.e we are clicking on a tower that has already been clicked
+            if(firstRing){
+                if(selected.dataset.weight == firstRing.dataset.weight){
+                    //they are the same to deselect it
+                    selected.classList.remove("selected");
+                    selected = null;
+                }
+                //else if different then try and see if we can place it on top
+                //we compare whats selected weight to first ring weight
+                else if(selected.dataset.weight  < firstRing.dataset.weight){
+                    //we can only place on top if its less than
+                    tower.insertBefore(selected,firstRing);
+                    selected.classList.remove("selected");
+                    selected = null;
+                }
+            }else{
+                tower.appendChild(selected);
+                selected.classList.remove("selected");
+                selected = null;
+            }
+        }else{
+            if (firstRing) {
+                selected = firstRing;
+                selected.classList.add("selected");
+            }
         }
-      }
-// first tower gets selected
-    } else {
-      $selectedPiece = $(this).children(":first");
-      $selectedPiece.addClass("selected");
-      towerSelected = true;
-      selectedTowerId = this.id;
-  }
-  checkGameWon();
-}
+});
 
-function validMove(topPieceId, bottomPieceId){
-    return parseInt(topPieceId[5]) < parseInt(bottomPieceId[5])
-}
+//code for third tower
+thirdTower.addEventListener('click', function(event){
+    //check if same tower selected
+    var tower = event.target;
+    var firstRing = event.target.firstElementChild;
+        if(selected){
+            //two things can happen here:
+            //if first child is already selected, then deselect it
+            //i.e we are clicking on a tower that has already been clicked
+            if(firstRing){
+                if(selected.dataset.weight == firstRing.dataset.weight){
+                    //they are the same to deselect it
+                    selected.classList.remove("selected");
+                    selected = null;
+                }
+                //else if different then try and see if we can place it on top
+                //we compare whats selected weight to first ring weight
+                else if(selected.dataset.weight  < firstRing.dataset.weight){
+                    //we can only place on top if its less than
+                    tower.insertBefore(selected,firstRing);
+                    selected.classList.remove("selected");
+                    selected = null;
+                    //check to see if you are done. we only need this for tower 3
+                    var weight = '';
+                    for(var i = 0; i < tower.children.length; i++){
+                        weight += tower.children[i].dataset.weight;
+                    }
+                    if(weight === '123'){
+                        //should run when game is run
+                        alert("Winner");
+                        document.querySelector("#winning").classList.remove("hidden");
 
-function checkGameWon(){
-    var count = $("#tower3").children().length;
-    if (count === 4)
-        return youWin();
-}
+                    }
+                }
+            }else{
+                tower.appendChild(selected);
+                selected.classList.remove("selected");
+                selected = null;
+            }
+        }else{
+            if (firstRing) {
+                selected = firstRing;
 
-function youWin(){
-    $('body').css("background-color", "LightSalmon");
-    $('#displayOutput').text("You win!");
-}
+                console.log(selected)
+                selected.classList.add("selected");
+            }
+        }
+});

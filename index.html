@@ -1,33 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Towers of Hanoi</title>
-  <link rel="stylesheet" href="style.css">
-  <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Tower of Hanoi</title>
+    <link rel = "stylesheet" href= "style.css">
 </head>
-
 <body>
-  <div id="displayOutput">Towers of Hanoi</div>
-  <div id="displayMoves">Moves: 0</div>
-  <div id="board">
-    <div class="shell" >
-      <div id="tower1" class="towerBase">
-        <div id="piece1" class="piece"></div>
-        <div id="piece2" class="piece"></div>
-        <div id="piece3" class="piece"></div>
-        <div id="piece4" class="piece"></div>
-      </div>
-    </div>
-    <div class="shell">
-      <div id="tower2" class="towerBase"></div>
-    </div>
-    <div class="shell">
-      <div id="tower3" class="towerBase"></div>
-    </div>
-  </div>
-
-  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-  <script src="main.js"></script>
+    <header class = "title">
+        <h1 class = "gameTitle">The Tower of Hanoi</h1>
+    </header>
+    <main>
+            <section class="towers" id="firstTower">
+                        <div class="rings" id="firstRing" data-weight = 1 ></div>
+                        <div class="rings" id="secondRing" data-weight = 2></div>
+                        <div class="rings" id="thirdRing" data-weight = 3></div>
+            </section>
+            <section class="towers" id="secondTower">
+                </div>
+            </section>
+            <section class="towers" id="thirdTower">
+                </div>
+            </section>
+</main>
 </body>
+<script src="main.js"></script>
 </html>

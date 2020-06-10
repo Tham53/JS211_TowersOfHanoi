@@ -1,9 +1,106 @@
-This is my tower of hanoi project for ACA. The object of the game is to stack the blocks from the left side to the right side. But you have to put a big block on top of a small block. This was made with html5, css, and javascript.
+CODEPLAN
 
+STEP 1
+Set up an index.hmtl file, main.js file and style.css file
+
+STEP 2- Index.html
+Link HTML to css and js. Set up sections for each towers, and div classes for blocks in the first tower only.
+
+STEP 3- Main.js
+//Establish a set of variables for the towers and blocks.
+var selected = null;
+var firstTower = document.querySelector('#firstTower');
+var secondTower = document.querySelector('#secondTower');
+var thirdTower = document.querySelector('#thirdTower');
+var firstBlock = document.querySelector('#firstBlock');
+var secondBlock = document.querySelector('#secondBlock');
+var thirdBlock = document.querySelector('#thirdBlock');
+
+
+
+STEP 4- First Tower
+//Give it an event listener when clicked.
+
+firstTower.addEventListener('click', function(event){
+    
+//check if same tower selected
+
+    var tower = event.target;
+    var firstBlock = event.target.firstElementChild;
+        if(selected){
+
+
+//two things can happen here:
+//if first child is already selected, then deselect it
+//i.e we are clicking on a tower that has already been clicked
+
+if(firstBlock){
+    if(selected.dataset.weight == firstBlock.dataset.weight){
+
+//they are the same to deselect it
+
+        selected.classList.remove("selected");
+        selected = null;
+    }
+
+//else if different then try and see if we can place it on top
+//we compare whats selected weight to first block weight
+
+                else if(selected.dataset.weight  < firstBlock.dataset.weight){
+
+//we can only place on top if its less than
+
+                    tower.insertBefore(selected,firstBlock);
+                    selected.classList.remove("selected");
+                    selected = null;
+                }
+            }else{
+                tower.appendChild(selected);
+                selected.classList.remove("selected");
+                selected = null;
+            }
+        }else{
+            selected = firstBlock;
+            selected.classList.add("selected");
+        }       
+});
+
+
+
+STEP 5- Second and third tower
+//Copy paste code from first tower, and re-name event listeners for second and third towers.
+
+STEP 6- Establish winner
+//establish winner code has to be in third tower
+//create a query selector for winner
+
+document.querySelector("#winning").classList.remove("winner");
+
+STEP 7- The CSS
+Need to grab a block picture from google images for each block
+
+create css for
+.title
+main
+.towers
+#firstBlock
+#secondBlock
+#thirdBlock
+a
+.selected
+.winner
+
+
+
+
+
+
+
+
+This is my tower of hanoi project for ACA. The object of the game is to stack the blocks from the left side to the right side. But you have to put a big block on top of a small block. This was made with html5, css, and javascript.
 Instructions
 1. Click on a block, it will be highlighted in green.
 2. Click on a tower to stack.
-
 Rules
 1. You can only move one block at a time.
 2. Big blocks cant go on little blocks.

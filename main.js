@@ -123,3 +123,4 @@ thirdTower.addEventListener('click', function(event){
                 selected.classList.add("selected");
             }
         }
+});

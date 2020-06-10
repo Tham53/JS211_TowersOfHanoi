@@ -123,8 +123,3 @@ thirdTower.addEventListener('click', function(event){
                 selected.classList.add("selected");
             }
         }
-<<<<<<< HEAD
-});
-=======
-});
->>>>>>> refs/remotes/origin/master
